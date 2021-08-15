@@ -1,0 +1,12 @@
+.main .page-title {
+    color: #333;
+    font-size: 40px;
+}
+
+.main .page-description {
+    color: #777;
+}
+
+.main {
+    padding: 30px;
+}
