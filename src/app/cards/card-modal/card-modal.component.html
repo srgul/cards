@@ -1,5 +1,9 @@
-<h2 mat-dialog-title>Yeni Kartvizit</h2>
+<h2 mat-dialog-title>{{ data ? "Kartviziti Düzenle" : "Yeni Kartvizit" }}</h2>
 <mat-dialog-content class="mat-typography">
+    <div *ngIf="showSpinner">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <br>
+    </div>
     <form [formGroup]="cardForm">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Title</mat-label>
@@ -24,6 +28,11 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Vazgeç</button>
-    <button mat-button [mat-dialog-close]="true" (click)="addCards()" cdkFocusInitial>Ekle</button>
+    <div class="flex-grow-1 text-start">
+        <button (click)="deleteCard()" mat-button color="warn" class="btn btn-danger text-white btn-sm" *ngIf="data" [disabled]="showSpinner">Sil</button>
+    </div>
+    <div>
+        <button mat-button mat-dialog-close>Vazgeç</button>
+        <button mat-button [mat-dialog-close]="true" (click)="data ? updateCard() : addCards()" [disabled]="cardForm.invalid ||showSpinner"> {{ data ? "Düzenle" : "Ekle" }} </button>
+    </div>
 </mat-dialog-actions>

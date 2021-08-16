@@ -10,7 +10,13 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-md-6 col-lg-3" *ngFor="let card of cards">
+        <div class="col-12" *ngIf="!cardService.cards">
+            <span>Kartlar yükleniyor lütfen bekleyiniz</span>
+        </div>
+        <div class="col-12" *ngIf="cardService.cards?.length === 0">
+            <span>Henüz kart eklemediniz. <a class="here" (click)="openAddCardModal()" >Buraya</a> tıklayarak kart ekleyebilirsiniz! </span>
+        </div>
+        <div class="col-md-6 col-lg-3" *ngFor="let card of cardService.cards">
             <app-card-item [card]="card"></app-card-item>
         </div>
     </div>
